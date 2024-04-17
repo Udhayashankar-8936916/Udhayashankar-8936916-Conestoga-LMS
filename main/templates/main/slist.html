@@ -1,0 +1,35 @@
+{% extends "main/base.html" %}
+
+{% block title %} Issue Book {% endblock %}
+
+{% block content %}
+
+    <h1 align="center">Student-list</h1>
+
+    <div class="container-center">
+        <div class="table-list">
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Student Number</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in users %}
+                        {% if not user.is_admin %}
+                            <tr>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.student_number }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

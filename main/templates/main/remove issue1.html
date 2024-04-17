@@ -1,0 +1,43 @@
+{% extends "main/base.html" %}
+
+{% block title %} Return {% endblock %}
+
+{% block content %}
+
+    <h1 align="center">Remove Issue</h1>
+
+    <div class="container-center">
+
+        <form method="post" class="main-form">
+
+            {% csrf_token %}
+
+            <label for="book-list">Book</label>
+            <select name="bookList" id="book-list">
+                
+                {% if books %}
+                    {% for book in books %}
+                        <option value="{{ book.title }}">
+                            {{ book.title }} ({{book.user.student_number}})
+                        </option>
+                    {% endfor %}
+                    {% if not books %}
+                        <option value="" disabled selected>No books available</option>
+                    {% endif %}
+                {% else %}
+                    <option value="" disabled selected>No books available</option>
+                {% endif %}
+
+            </select>
+
+            {% if books %}
+                <input type="submit" value="Remove">
+            {% endif %}
+            
+            <!-- <a href="/remove-issue/">View all borrowed books</a> -->
+
+        </form>
+        
+    </div>
+
+{% endblock %}

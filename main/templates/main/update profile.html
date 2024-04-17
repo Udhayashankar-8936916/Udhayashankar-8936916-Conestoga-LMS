@@ -1,0 +1,37 @@
+{% extends "main/base.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<h1 align="center">Edit Profile</h1>
+
+<div class="container-center">
+    <form method="post" enctype="multipart/form-data" class="main-form">
+        {% csrf_token %}
+
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}">
+        {% else %}
+            <img src="{% static 'img/profile pic.jpg'%}">
+        {% endif %}
+        <br><br>
+        <label for="file">Upload Image</label><br>
+        <input type="file" name="file" id="file"><br>
+
+        <label for="id_name">Name:</label>
+        <input type="text" id="id_name" name="name" value="{{ request.user.name }}"><br>
+        <label for="id_student_number">Student Number:</label>
+        <input type="text" id="id_student_number" name="student_number" value="{{ request.user.student_number }}">
+        <label for="id_email">Email:</label>
+        <input type="text" id="id_email" name="email" value="{{ request.user.email }}">
+        <br>
+
+        <input type="submit" value="Update">
+        <a href="/update profile/"></a>
+    </form>
+</div>
+
+{% endblock %}
